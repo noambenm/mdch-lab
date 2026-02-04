@@ -28,6 +28,9 @@ spec:
       name: flagger
       namespace: flagger-system
     - kind: HelmRelease
+      name: flux-operator
+      namespace: flux-system
+    - kind: HelmRelease
       name: cert-manager
       namespace: cert-manager
     - kind: HelmRelease

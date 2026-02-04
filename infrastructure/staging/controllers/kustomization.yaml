@@ -21,6 +21,15 @@ patches:
       - op: replace
         path: /spec/ref
         value:
+          semver: '*'
+    target:
+      kind: OCIRepository
+      name: flux-operator
+      namespace: flux-system
+  - patch: |
+      - op: replace
+        path: /spec/ref
+        value:
           semver: 1.x
     target:
       kind: OCIRepository

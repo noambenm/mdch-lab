@@ -6,6 +6,7 @@ resources:
   - external-secrets.yaml
   - flagger-load-tester.yaml
   - flagger.yaml
+  - flux-operator.yaml
   - gateway-api.yaml
   - keda.yaml
   - kube-prometheus-stack.yaml
