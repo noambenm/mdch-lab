@@ -7,6 +7,7 @@ resources:
   - flagger-slack-webhook-url.yaml
   - flux-podmonitor.yaml
   - flux-pubsub.yaml
+  - flux-ui.yaml
   - flux-webhook-receiver.yaml
   - fluxcd-slack.yaml
   - gateway.yaml

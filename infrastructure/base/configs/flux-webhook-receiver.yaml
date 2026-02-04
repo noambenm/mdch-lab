@@ -65,6 +65,5 @@ spec:
     matchLabels:
       app: notification-controller
   ingress:
-  - fromEndpoints:
-    - matchLabels:
-        "reserved:ingress": ""
+    - fromEntities:
+      - ingress
