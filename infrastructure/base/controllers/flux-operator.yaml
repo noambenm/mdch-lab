@@ -11,7 +11,7 @@ spec:
     operation: copy
   url: oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator
   ref:
-    digest: sha256:599e4cb2ebf11c009a635a726f6fdededa7670c587038a8c14f20ff7f5e834a1
+    digest: sha256:32537f001213136cca3ee0553fec4360344e4d65d10d4c7c2f791a1d3af8b7d0 # version 0.40.0+32537f001213
   verify:
     provider: cosign
 ---
