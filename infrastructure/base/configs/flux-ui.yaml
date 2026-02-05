@@ -32,6 +32,7 @@ spec:
   ingress:
   - fromEntities:
     - ingress
+    - world
     toPorts:
     - ports:
       - port: "9080"
