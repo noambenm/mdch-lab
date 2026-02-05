@@ -55,6 +55,14 @@ patches:
       namespace: monitoring
   - patch: |
       - op: replace
+        path: /spec/hostnames/0
+        value: flux.staging.mdch-lab.dev
+    target:
+      kind: HTTPRoute
+      name: flux-web
+      namespace: flux-system
+  - patch: |
+      - op: replace
         path: /spec/acme/server
         value: https://acme-staging-v02.api.letsencrypt.org/directory
     target:
