@@ -4,6 +4,7 @@ resources:
   - ../../base/configs
   - helm-dispatch.yaml
   - healthchecks.yaml
+  - ssl-policy.yaml
 patches:
   - patch: |
       - op: replace
