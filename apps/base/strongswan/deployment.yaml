@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gcp-vpn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gcp-vpn
+  template:
+    metadata:
+      labels:
+        app: gcp-vpn
+    spec:
+      hostNetwork: true
+      imagePullSecrets:
+      - name: gcr-token
+      containers:
+      - name: strongswan
+        image: me-west1-docker.pkg.dev/noambesandbox/strongswan/strongswan:6.0.4
+        securityContext:
+          privileged: true
+          capabilities:
+            add: ["NET_ADMIN", "SYS_ADMIN", "SYS_MODULE"]
+        command: ["/bin/sh", "-c", "./charon"]
+        volumeMounts:
+        - name: strongswan-conf
+          mountPath: /etc/strongswan.conf
+          subPath: strongswan.conf
+        - name: swanctl-volume
+          mountPath: /etc/swanctl/swanctl.conf
+          subPath: swanctl.conf
+      volumes:
+      - name: strongswan-conf
+        configMap:
+          name: strongswan-config
+          items:
+          - key: strongswan.conf
+            path: strongswan.conf
+      - name: swanctl-volume
+        configMap:
+          name: strongswan-config
+          items:
+          - key: swanctl.conf
+            path: swanctl.conf

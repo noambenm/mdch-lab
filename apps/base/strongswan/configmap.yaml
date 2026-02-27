@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: strongswan-config
+data:
+  strongswan.conf: |
+    charon {
+       start-scripts {
+          creds = swanctl --load-creds
+          conns = swanctl --load-conns
+          pools = swanctl --load-pools
+       }
+       filelog {
+          stderr {
+             default = 1
+          }
+       }
+    }
+  swanctl.conf: |
+    connections {
+       gcp-vpn {
+          remote_addrs = 34.165.169.228
+          local_addrs = 192.168.1.10   # <-- Changed from %any
+          version = 2
+          proposals = aes256-sha256-modp2048,default
+          local {
+             auth = psk
+             id = 89.138.10.40
+          }
+          remote {
+             auth = psk
+             id = 34.165.169.228
+          }
+          children {
+             gcp-child {
+                local_ts = 192.168.0.0/16
+                remote_ts = 10.20.0.0/16
+                esp_proposals = aes256-sha256,default
+                dpd_action = restart
+                start_action = start
+             }
+          }
+       }
+    }
+    secrets {
+       ike-gcp {
+          id_local = 89.138.10.40
+          id_remote = 34.165.169.228
+          secret = Qu3B2yF5aS+6z6fJOiTbaujRoW77/Dw1
+       }
+    }
