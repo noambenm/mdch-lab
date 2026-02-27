@@ -5,47 +5,129 @@ metadata:
 data:
   strongswan.conf: |
     charon {
-       start-scripts {
-          creds = swanctl --load-creds
-          conns = swanctl --load-conns
-          pools = swanctl --load-pools
-       }
-       filelog {
-          stderr {
-             default = 1
-          }
-       }
+      install_routes = no
+      install_virtual_ip = no
+      start-scripts {
+        creds = swanctl --load-creds
+        conns = swanctl --load-conns
+      }
+      filelog {
+        stderr {
+          default = 1
+        }
+      }
     }
   swanctl.conf: |
     connections {
-       gcp-vpn {
-          remote_addrs = 34.165.169.228
-          local_addrs = 192.168.1.10   # <-- Changed from %any
-          version = 2
-          proposals = aes256-sha256-modp2048,default
-          local {
-             auth = psk
-             id = 89.138.10.40
+      gcp-tunnel-0 {
+        remote_addrs = 34.153.62.130
+        local_addrs = 192.168.1.10
+        local {
+          auth = psk
+          id = 89.138.10.40
+        }
+        remote {
+          auth = psk
+          id = 34.153.62.130
+        }
+        children {
+          gcp-child-0 {
+            local_ts = 0.0.0.0/0
+            remote_ts = 0.0.0.0/0
+            if_id_in = 42
+            if_id_out = 42
+            dpd_action = restart
+            start_action = start
           }
-          remote {
-             auth = psk
-             id = 34.165.169.228
+        }
+      }
+      gcp-tunnel-1 {
+        remote_addrs = 34.153.252.191
+        local_addrs = 192.168.1.10
+        local {
+          auth = psk
+          id = 89.138.10.40
+        }
+        remote {
+          auth = psk
+          id = 34.153.252.191
+        }
+        children {
+          gcp-child-1 {
+            local_ts = 0.0.0.0/0
+            remote_ts = 0.0.0.0/0
+            if_id_in = 43
+            if_id_out = 43
+            dpd_action = restart
+            start_action = start
           }
-          children {
-             gcp-child {
-                local_ts = 192.168.0.0/16
-                remote_ts = 10.20.0.0/16
-                esp_proposals = aes256-sha256,default
-                dpd_action = restart
-                start_action = start
-             }
-          }
-       }
+        }
+      }
     }
     secrets {
-       ike-gcp {
-          id_local = 89.138.10.40
-          id_remote = 34.165.169.228
-          secret = Qu3B2yF5aS+6z6fJOiTbaujRoW77/Dw1
-       }
+      ike-gcp-0 {
+        id_local = 89.138.10.40
+        id_remote = 34.153.62.130
+        secret = kwQ4d1z99ls
+      }
+      ike-gcp-1 {
+        id_local = 89.138.10.40
+        id_remote = 34.153.252.191
+        secret = kwQ4d1z99ls
+      }
+    }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bird-config
+data:
+  bird.conf: |
+    log stderr all;
+    router id 192.168.1.10;
+
+    protocol device {
+      scan time 10;
+    }
+
+    protocol direct {
+      ipv4;
+      interface "*";
+    }
+
+    protocol kernel {
+      ipv4 {
+        import all;
+        export all;
+      };
+      learn all;
+    }
+    protocol bgp gcp_tunnel_0 {
+      local 169.254.0.2 as 64513;
+      neighbor 169.254.0.1 as 64514;
+      ipv4 {
+        import filter {
+          krt_prefsrc = 192.168.1.10;
+          accept;
+        };
+        export filter {
+          if net = 192.168.1.0/24 then accept;
+          reject;
+        };
+      };
+    }
+
+    protocol bgp gcp_tunnel_1 {
+      local 169.254.1.2 as 64513;
+      neighbor 169.254.1.1 as 64514;
+      ipv4 {
+        import filter {
+          krt_prefsrc = 192.168.1.10;
+          accept;
+        };
+        export filter {
+          if net = 192.168.1.0/24 then accept;
+          reject;
+        };
+      };
     }

@@ -5,6 +5,8 @@ metadata:
   name: gcp-vpn
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: gcp-vpn
@@ -16,6 +18,31 @@ spec:
       hostNetwork: true
       imagePullSecrets:
       - name: gcr-token
+      initContainers:
+      - name: network-setup
+        image: alpine:latest
+        securityContext:
+          privileged: true
+          capabilities:
+            add: ["NET_ADMIN"]
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache iproute2
+          echo "--- Starting Network Clean Slate ---"
+          ip xfrm state flush || true
+          ip xfrm policy flush || true
+          if ip link show ipsec0 >/dev/null 2>&1; then ip link delete ipsec0; fi
+          ip link add ipsec0 type xfrm dev eth0 if_id 42
+          ip link set ipsec0 mtu 1400 up
+          ip addr add 169.254.0.2/30 dev ipsec0
+          if ip link show ipsec1 >/dev/null 2>&1; then ip link delete ipsec1; fi
+          ip link add ipsec1 type xfrm dev eth0 if_id 43
+          ip link set ipsec1 mtu 1400 up
+          ip addr add 169.254.1.2/30 dev ipsec1
+          sysctl -w net.ipv4.ip_forward=1
+          echo "--- Network Setup Complete ---"
       containers:
       - name: strongswan
         image: me-west1-docker.pkg.dev/noambesandbox/strongswan/strongswan:6.0.4
@@ -25,22 +52,31 @@ spec:
             add: ["NET_ADMIN", "SYS_ADMIN", "SYS_MODULE"]
         command: ["/bin/sh", "-c", "./charon"]
         volumeMounts:
-        - name: strongswan-conf
+        - name: strongswan-volume
           mountPath: /etc/strongswan.conf
           subPath: strongswan.conf
-        - name: swanctl-volume
+        - name: strongswan-volume
           mountPath: /etc/swanctl/swanctl.conf
           subPath: swanctl.conf
+      - name: bird
+        image: alpine:latest
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
+        command: 
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache bird
+          bird -c /etc/bird.conf -d
+        volumeMounts:
+        - name: bird-volume
+          mountPath: /etc/bird.conf
+          subPath: bird.conf
       volumes:
-      - name: strongswan-conf
+      - name: strongswan-volume
         configMap:
           name: strongswan-config
-          items:
-          - key: strongswan.conf
-            path: strongswan.conf
-      - name: swanctl-volume
+      - name: bird-volume
         configMap:
-          name: strongswan-config
-          items:
-          - key: swanctl.conf
-            path: swanctl.conf
+          name: bird-config
