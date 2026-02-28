@@ -44,6 +44,8 @@ dnsmasq:
     - host-record=controlplane.mdch-lab.dev,192.168.1.10
     - address=/.mdch-lab.dev/192.168.1.25
     - server=/staging.mdch-lab.dev/#
+    - server=/gcp.mdch-lab.dev/10.208.0.16
+    - server=/cloudworkstations.dev/10.208.0.16
 
 adlists:
   - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
