@@ -1,0 +1,68 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: bird-config
+spec:
+  secretStoreRef:
+    name: gcpsm
+    kind: ClusterSecretStore
+  target:
+    name: bird-config
+    template:
+      engineVersion: v2
+      data:
+        bird.conf: |
+          {{ $cfg := .vpn_json | fromJson }}
+          log stderr all;
+          router id {{ $cfg.local.internalGatewayIp }};
+
+          protocol device {
+            scan time 10;
+          }
+
+          protocol direct {
+            ipv4;
+            interface "*";
+          }
+
+          protocol kernel {
+            ipv4 {
+              import all;
+              export all;
+            };
+            learn all;
+          }
+
+          protocol bgp gcp_tunnel_0 {
+            local {{ (index $cfg.tunnels 0).localBgpIp }} as {{ $cfg.local.asn }};
+            neighbor {{ (index $cfg.tunnels 0).neighborBgpIp }} as {{ $cfg.remote.asn }};
+            ipv4 {
+              import filter {
+                krt_prefsrc = {{ $cfg.local.internalGatewayIp }};
+                accept;
+              };
+              export filter {
+                if net = 192.168.1.0/24 then accept;
+                reject;
+              };
+            };
+          }
+
+          protocol bgp gcp_tunnel_1 {
+            local {{ (index $cfg.tunnels 1).localBgpIp }} as {{ $cfg.local.asn }};
+            neighbor {{ (index $cfg.tunnels 1).neighborBgpIp }} as {{ $cfg.remote.asn }};
+            ipv4 {
+              import filter {
+                krt_prefsrc = {{ $cfg.local.internalGatewayIp }};
+                accept;
+              };
+              export filter {
+                if net = 192.168.1.0/24 then accept;
+                reject;
+              };
+            };
+          }
+  data:
+  - secretKey: vpn_json
+    remoteRef:
+      key: gcp-vpn-config

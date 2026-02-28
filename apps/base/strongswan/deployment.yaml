@@ -25,6 +25,17 @@ spec:
           privileged: true
           capabilities:
             add: ["NET_ADMIN"]
+        env:
+        - name: LINK_0_IP
+          valueFrom:
+            secretKeyRef:
+              name: swanctl-config
+              key: LINK_0_IP
+        - name: LINK_1_IP
+          valueFrom:
+            secretKeyRef:
+              name: swanctl-config
+              key: LINK_1_IP
         command:
         - /bin/sh
         - -c
@@ -36,11 +47,11 @@ spec:
           if ip link show ipsec0 >/dev/null 2>&1; then ip link delete ipsec0; fi
           ip link add ipsec0 type xfrm dev eth0 if_id 42
           ip link set ipsec0 mtu 1400 up
-          ip addr add 169.254.0.2/30 dev ipsec0
+          ip addr add $LINK_0_IP dev ipsec0
           if ip link show ipsec1 >/dev/null 2>&1; then ip link delete ipsec1; fi
           ip link add ipsec1 type xfrm dev eth0 if_id 43
           ip link set ipsec1 mtu 1400 up
-          ip addr add 169.254.1.2/30 dev ipsec1
+          ip addr add $LINK_1_IP dev ipsec1
           sysctl -w net.ipv4.ip_forward=1
           echo "--- Network Setup Complete ---"
       containers:
@@ -50,12 +61,25 @@ spec:
           privileged: true
           capabilities:
             add: ["NET_ADMIN", "SYS_ADMIN", "SYS_MODULE"]
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              - |
+                echo "--- Commencing Host Network Cleanup ---"
+                ip xfrm state flush || true
+                ip xfrm policy flush || true
+                if ip link show ipsec0 >/dev/null 2>&1; then ip link delete ipsec0; fi
+                if ip link show ipsec1 >/dev/null 2>&1; then ip link delete ipsec1; fi
+                echo "--- Cleanup Complete ---"
         command: ["/bin/sh", "-c", "./charon"]
         volumeMounts:
         - name: strongswan-volume
           mountPath: /etc/strongswan.conf
           subPath: strongswan.conf
-        - name: strongswan-volume
+        - name: swanctl-volume
           mountPath: /etc/swanctl/swanctl.conf
           subPath: swanctl.conf
       - name: bird
@@ -77,6 +101,9 @@ spec:
       - name: strongswan-volume
         configMap:
           name: strongswan-config
+      - name: swanctl-volume
+        secret:
+          secretName: swanctl-config
       - name: bird-volume
-        configMap:
-          name: bird-config
+        secret:
+          secretName: bird-config

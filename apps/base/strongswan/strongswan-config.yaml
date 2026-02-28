@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: strongswan-config
+data:
+  strongswan.conf: |
+    charon {
+      install_routes = no
+      install_virtual_ip = no
+      start-scripts {
+        creds = swanctl --load-creds
+        conns = swanctl --load-conns
+      }
+      filelog {
+        stderr {
+          default = 1
+        }
+      }
+    }
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: swanctl-config
+spec:
+  secretStoreRef:
+    name: gcpsm
+    kind: ClusterSecretStore
+  target:
+    name: swanctl-config
+    template:
+      engineVersion: v2
+      data:
+        LINK_0_IP: '{{ (index (fromJson .vpn_json).tunnels 0).linkSubnet }}'
+        LINK_1_IP: '{{ (index (fromJson .vpn_json).tunnels 1).linkSubnet }}'
+        swanctl.conf: |
+          {{ $cfg := .vpn_json | fromJson }}
+          connections {
+            gcp-tunnel-0 {
+              remote_addrs = {{ (index $cfg.tunnels 0).remoteGatewayIp }}
+              local_addrs = {{ $cfg.local.internalGatewayIp }}
+              local {
+                auth = psk
+                id = {{ $cfg.local.externalIp }}
+              }
+              remote {
+                auth = psk
+                id = {{ (index $cfg.tunnels 0).remoteGatewayIp }}
+              }
+              children {
+                gcp-child-0 {
+                  local_ts = 0.0.0.0/0
+                  remote_ts = 0.0.0.0/0
+                  if_id_in = 42
+                  if_id_out = 42
+                  dpd_action = restart
+                  start_action = start
+                }
+              }
+            }
+            gcp-tunnel-1 {
+              remote_addrs = {{ (index $cfg.tunnels 1).remoteGatewayIp }}
+              local_addrs = {{ $cfg.local.internalGatewayIp }}
+              local {
+                auth = psk
+                id = {{ $cfg.local.externalIp }}
+              }
+              remote {
+                auth = psk
+                id = {{ (index $cfg.tunnels 1).remoteGatewayIp }}
+              }
+              children {
+                gcp-child-1 {
+                  local_ts = 0.0.0.0/0
+                  remote_ts = 0.0.0.0/0
+                  if_id_in = 43
+                  if_id_out = 43
+                  dpd_action = restart
+                  start_action = start
+                }
+              }
+            }
+          }
+          secrets {
+            ike-gcp-0 {
+              id_local = {{ $cfg.local.externalIp }}
+              id_remote = {{ (index $cfg.tunnels 0).remoteGatewayIp }}
+              secret = {{ (index $cfg.tunnels 0).psk }}
+            }
+            ike-gcp-1 {
+              id_local = {{ $cfg.local.externalIp }}
+              id_remote = {{ (index $cfg.tunnels 1).remoteGatewayIp }}
+              secret = {{ (index $cfg.tunnels 1).psk }}
+            }
+          }
+  data:
+  - secretKey: vpn_json
+    remoteRef:
+      key: gcp-vpn-config
