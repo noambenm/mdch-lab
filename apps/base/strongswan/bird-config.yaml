@@ -22,15 +22,15 @@ spec:
 
           protocol direct {
             ipv4;
-            interface "*";
+            interface "eth0", "ipsec*";
           }
 
           protocol kernel {
+            kernel table 100;
             ipv4 {
-              import all;
+              import none;
               export all;
             };
-            learn all;
           }
 
           protocol bgp gcp_tunnel_0 {

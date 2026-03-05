@@ -17,6 +17,8 @@ data:
         }
       }
     }
+  swanctl.conf: |
+    include conf.d/*.conf
 ---
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
@@ -33,12 +35,13 @@ spec:
       data:
         LINK_0_IP: '{{ (index (fromJson .vpn_json).tunnels 0).linkSubnet }}'
         LINK_1_IP: '{{ (index (fromJson .vpn_json).tunnels 1).linkSubnet }}'
-        swanctl.conf: |
+        gcp.conf: |
           {{ $cfg := .vpn_json | fromJson }}
           connections {
             gcp-tunnel-0 {
               remote_addrs = {{ (index $cfg.tunnels 0).remoteGatewayIp }}
               local_addrs = {{ $cfg.local.internalGatewayIp }}
+              proposals = aes128gcm16-prfsha1-modp2048
               local {
                 auth = psk
                 id = {{ $cfg.local.externalIp }}
@@ -61,6 +64,7 @@ spec:
             gcp-tunnel-1 {
               remote_addrs = {{ (index $cfg.tunnels 1).remoteGatewayIp }}
               local_addrs = {{ $cfg.local.internalGatewayIp }}
+              proposals = aes128gcm16-prfsha1-modp2048
               local {
                 auth = psk
                 id = {{ $cfg.local.externalIp }}

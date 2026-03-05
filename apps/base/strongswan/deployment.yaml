@@ -44,6 +44,8 @@ spec:
           echo "--- Starting Network Clean Slate ---"
           ip xfrm state flush || true
           ip xfrm policy flush || true
+          ip rule del table 100 2>/dev/null || true
+          ip rule add pref 1000 table 100
           if ip link show ipsec0 >/dev/null 2>&1; then ip link delete ipsec0; fi
           ip link add ipsec0 type xfrm dev eth0 if_id 42
           ip link set ipsec0 mtu 1400 up
@@ -71,6 +73,7 @@ spec:
                 echo "--- Commencing Host Network Cleanup ---"
                 ip xfrm state flush || true
                 ip xfrm policy flush || true
+                ip rule del table 100 2>/dev/null || true
                 if ip link show ipsec0 >/dev/null 2>&1; then ip link delete ipsec0; fi
                 if ip link show ipsec1 >/dev/null 2>&1; then ip link delete ipsec1; fi
                 echo "--- Cleanup Complete ---"
@@ -79,9 +82,11 @@ spec:
         - name: strongswan-volume
           mountPath: /etc/strongswan.conf
           subPath: strongswan.conf
-        - name: swanctl-volume
+        - name: strongswan-volume
           mountPath: /etc/swanctl/swanctl.conf
           subPath: swanctl.conf
+        - name: swanctl-volume
+          mountPath: /etc/swanctl/conf.d/
       - name: bird
         image: alpine:latest
         securityContext:
