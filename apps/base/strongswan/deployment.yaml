@@ -79,9 +79,11 @@ spec:
         - name: strongswan-volume
           mountPath: /etc/strongswan.conf
           subPath: strongswan.conf
-        - name: swanctl-volume
+        - name: strongswan-volume
           mountPath: /etc/swanctl/swanctl.conf
           subPath: swanctl.conf
+        - name: swanctl-volume
+          mountPath: /etc/swanctl/conf.d/
       - name: bird
         image: alpine:latest
         securityContext:

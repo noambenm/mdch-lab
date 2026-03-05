@@ -27,10 +27,9 @@ spec:
 
           protocol kernel {
             ipv4 {
-              import all;
+              import none;
               export all;
             };
-            learn all;
           }
 
           protocol bgp gcp_tunnel_0 {

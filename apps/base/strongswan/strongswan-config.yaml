@@ -17,6 +17,8 @@ data:
         }
       }
     }
+  swanctl.conf: |
+    include conf.d/*.conf
 ---
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
@@ -33,7 +35,7 @@ spec:
       data:
         LINK_0_IP: '{{ (index (fromJson .vpn_json).tunnels 0).linkSubnet }}'
         LINK_1_IP: '{{ (index (fromJson .vpn_json).tunnels 1).linkSubnet }}'
-        swanctl.conf: |
+        gcp.conf: |
           {{ $cfg := .vpn_json | fromJson }}
           connections {
             gcp-tunnel-0 {
