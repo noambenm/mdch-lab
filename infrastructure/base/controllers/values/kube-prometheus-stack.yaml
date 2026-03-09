@@ -13,7 +13,7 @@ grafana:
       - kubernetes.io/pvc-protection
 
 kubeControllerManager:
-  enabled: true
+  enabled: false
   endpoints: ['192.168.1.10']
   service:
     port: 10257
@@ -26,7 +26,7 @@ kubeEtcd:
   enabled: false
 
 kubeScheduler:
-  enabled: true
+  enabled: false
   endpoints: ['192.168.1.10']
   service:
     port: 10259
