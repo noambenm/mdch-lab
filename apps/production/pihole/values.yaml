@@ -40,9 +40,8 @@ DNS2: "1.0.0.1"
 
 dnsmasq:
   customDnsEntries:
-    - host-record=mdch-lab.dev,192.168.1.25
     - host-record=controlplane.mdch-lab.dev,192.168.1.10
-    - address=/.mdch-lab.dev/192.168.1.25
+    - address=/mdch-lab.dev/192.168.1.25
     - server=/staging.mdch-lab.dev/#
     - server=/gcp.mdch-lab.dev/10.1.0.10
     - server=/cloudworkstations.dev/10.1.0.10
