@@ -44,6 +44,7 @@ dnsmasq:
     - server=/staging.mdch-lab.dev/#
     - server=/gcp.mdch-lab.dev/10.1.0.10
     - server=/cloudworkstations.dev/10.1.0.10
+    - server=/me-west1.p.sourcemanager.dev/10.1.0.10
 
 adlists:
   - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
