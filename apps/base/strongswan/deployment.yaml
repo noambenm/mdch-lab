@@ -58,7 +58,7 @@ spec:
           echo "--- Network Setup Complete ---"
       containers:
       - name: strongswan
-        image: me-west1-docker.pkg.dev/noambesandbox/strongswan/strongswan:6.0.4
+        image: me-west1-docker.pkg.dev/noambe-sandbox/strongswan/strongswan:6.0.4
         securityContext:
           privileged: true
           capabilities:

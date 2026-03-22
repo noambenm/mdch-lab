@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   type: googlepubsub
-  address: noambesandbox
+  address: noambe-sandbox
   channel: flux-alerts
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta3

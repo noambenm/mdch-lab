@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  url: oci://me-west1-docker.pkg.dev/noambesandbox/mdch-lab/pihole
+  url: oci://me-west1-docker.pkg.dev/noambe-sandbox/mdch-lab/pihole
   ref:
     tag: latest
   provider: gcp

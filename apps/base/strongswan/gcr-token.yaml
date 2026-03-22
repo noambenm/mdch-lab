@@ -10,7 +10,7 @@ metadata:
   name: gcr-gen
   namespace: vpn-system
 spec:
-  projectID: noambesandbox
+  projectID: noambe-sandbox
   auth:
     workloadIdentityFederation:
       audience: //iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/external-secrets

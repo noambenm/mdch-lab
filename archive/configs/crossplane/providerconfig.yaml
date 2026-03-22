@@ -3,7 +3,7 @@ kind: ProviderConfig
 metadata:
   name: default
 spec:
-  projectID: noambesandbox
+  projectID: noambe-sandbox
   credentials:
     source: Secret
     secretRef:
