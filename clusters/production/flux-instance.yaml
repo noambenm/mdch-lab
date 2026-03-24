@@ -42,7 +42,7 @@ spec:
               projected:
                 sources:
                 - serviceAccountToken:
-                    audience: https://iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd
+                    audience: https://iam.googleapis.com/projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd
                     expirationSeconds: 3600
                     path: gcp-token
           - op: add
@@ -81,7 +81,7 @@ spec:
               projected:
                 sources:
                 - serviceAccountToken:
-                    audience: https://iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd
+                    audience: https://iam.googleapis.com/projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd
                     expirationSeconds: 3600
                     path: gcp-token
           - op: add
@@ -120,7 +120,7 @@ spec:
               projected:
                 sources:
                 - serviceAccountToken:
-                    audience: https://iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd
+                    audience: https://iam.googleapis.com/projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd
                     expirationSeconds: 3600
                     path: gcp-token
           - op: add
@@ -159,7 +159,7 @@ spec:
               projected:
                 sources:
                 - serviceAccountToken:
-                    audience: https://iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd
+                    audience: https://iam.googleapis.com/projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd
                     expirationSeconds: 3600
                     path: gcp-token
           - op: add
@@ -198,7 +198,7 @@ spec:
               projected:
                 sources:
                 - serviceAccountToken:
-                    audience: https://iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd
+                    audience: https://iam.googleapis.com/projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd
                     expirationSeconds: 3600
                     path: gcp-token
           - op: add

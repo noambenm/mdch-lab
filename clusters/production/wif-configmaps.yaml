@@ -8,7 +8,7 @@ data:
     {
       "universe_domain": "googleapis.com",
       "type": "external_account",
-      "audience": "//iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd",
+      "audience": "//iam.googleapis.com/projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd",
       "subject_token_type": "urn:ietf:params:oauth:token-type:jwt",
       "token_url": "https://sts.googleapis.com/v1/token",
       "service_account_impersonation_url": "https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/source-controller@noambe-sandbox.iam.gserviceaccount.com:generateAccessToken",
@@ -30,7 +30,7 @@ data:
     {
       "universe_domain": "googleapis.com",
       "type": "external_account",
-      "audience": "//iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd",
+      "audience": "//iam.googleapis.com/projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd",
       "subject_token_type": "urn:ietf:params:oauth:token-type:jwt",
       "token_url": "https://sts.googleapis.com/v1/token",
       "service_account_impersonation_url": "https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/kustomize-controller@noambe-sandbox.iam.gserviceaccount.com:generateAccessToken",
@@ -52,7 +52,7 @@ data:
     {
       "universe_domain": "googleapis.com",
       "type": "external_account",
-      "audience": "//iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd",
+      "audience": "//iam.googleapis.com/projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd",
       "subject_token_type": "urn:ietf:params:oauth:token-type:jwt",
       "token_url": "https://sts.googleapis.com/v1/token",
       "service_account_impersonation_url": "https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/helm-controller@noambe-sandbox.iam.gserviceaccount.com:generateAccessToken",
@@ -74,7 +74,7 @@ data:
     {
       "universe_domain": "googleapis.com",
       "type": "external_account",
-      "audience": "//iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd",
+      "audience": "//iam.googleapis.com/projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd",
       "subject_token_type": "urn:ietf:params:oauth:token-type:jwt",
       "token_url": "https://sts.googleapis.com/v1/token",
       "service_account_impersonation_url": "https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/notification-controller@noambe-sandbox.iam.gserviceaccount.com:generateAccessToken",
@@ -96,7 +96,7 @@ data:
     {
       "universe_domain": "googleapis.com",
       "type": "external_account",
-      "audience": "//iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd",
+      "audience": "//iam.googleapis.com/projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/fluxcd",
       "subject_token_type": "urn:ietf:params:oauth:token-type:jwt",
       "token_url": "https://sts.googleapis.com/v1/token",
       "service_account_impersonation_url": "https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/image-reflector-controller@noambe-sandbox.iam.gserviceaccount.com:generateAccessToken",

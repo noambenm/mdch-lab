@@ -35,7 +35,7 @@ jobs:
         uses: google-github-actions/auth@v3
         with:
           project_id: noambe-sandbox
-          workload_identity_provider: projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/github-actions
+          workload_identity_provider: projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/github-actions
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v3

@@ -13,12 +13,12 @@ spec:
   projectID: noambe-sandbox
   auth:
     workloadIdentityFederation:
-      audience: //iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/external-secrets
+      audience: //iam.googleapis.com/projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/external-secrets
       serviceAccountRef:
         name: gcr-sa
         namespace: external-secrets
         audiences:
-          - https://iam.googleapis.com/projects/320535199479/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/external-secrets 
+          - https://iam.googleapis.com/projects/1061164374365/locations/global/workloadIdentityPools/mdch-lab-cluster-pool/providers/external-secrets 
 ---
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
