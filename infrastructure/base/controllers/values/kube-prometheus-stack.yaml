@@ -14,7 +14,7 @@ grafana:
 
 kubeControllerManager:
   enabled: false
-  endpoints: ['192.168.1.10']
+  endpoints: ['192.168.2.10']
   service:
     port: 10257
     targetPort: 10257
@@ -27,7 +27,7 @@ kubeEtcd:
 
 kubeScheduler:
   enabled: false
-  endpoints: ['192.168.1.10']
+  endpoints: ['192.168.2.10']
   service:
     port: 10259
     targetPort: 10259

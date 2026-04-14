@@ -10,6 +10,6 @@ volumeMounts:
 volumes:
   - name: jellyfin-media
     nfs:
-      server: 192.168.1.98
+      server: 192.168.2.98
       path: /nfs/Plex
       readOnly: false

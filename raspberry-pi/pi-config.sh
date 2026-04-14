@@ -9,9 +9,9 @@ sudo apt autoremove -y
 sudo rpi-update -y
 
 # Default IP configuration
-default_ip="192.168.1.10/24"
-default_gw="192.168.1.254"
-default_dns="192.168.1.254,1.1.1.1"
+default_ip="192.168.2.10/24"
+default_gw="192.168.2.1"
+default_dns="192.168.2.1,1.1.1.1"
 
 # Prompt user for IP details
 echo "Press Enter to accept default values."

@@ -1,7 +1,7 @@
 serviceDns:
   mixedService: true
   externalTrafficPolicy: Cluster
-  loadBalancerIP: 192.168.1.20
+  loadBalancerIP: 192.168.2.20
   type: LoadBalancer
 
 serviceDhcp:
@@ -27,7 +27,7 @@ admin:
 extraEnvVars:
   TZ: "Asia/Jerusalem"
   FTLCONF_dns_listeningMode: "all"
-  FTLCONF_dns_revServers: "true,192.168.1.0/24,192.168.1.254,mdch-lab.dev"
+  FTLCONF_dns_revServers: "true,192.168.2.0/24,192.168.2.1,mdch-lab.dev"
   PIHOLE_HOSTNAME: "localhost"
 
 extraEnvVarsSecret:
@@ -40,7 +40,7 @@ DNS2: "1.0.0.1"
 
 dnsmasq:
   customDnsEntries:
-    - address=/mdch-lab.dev/192.168.1.25
+    - address=/mdch-lab.dev/192.168.2.25
     - server=/staging.mdch-lab.dev/#
     - server=/gcp.mdch-lab.dev/10.1.0.10
     - server=/cloudworkstations.dev/10.1.0.10

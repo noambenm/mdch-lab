@@ -21,7 +21,7 @@ data:
     connections {
       gcp-tunnel-0 {
         remote_addrs = 34.153.62.130
-        local_addrs = 192.168.1.10
+        local_addrs = 192.168.2.10
         local {
           auth = psk
           id = 89.138.10.40
@@ -43,7 +43,7 @@ data:
       }
       gcp-tunnel-1 {
         remote_addrs = 34.153.252.191
-        local_addrs = 192.168.1.10
+        local_addrs = 192.168.2.10
         local {
           auth = psk
           id = 89.138.10.40
@@ -84,7 +84,7 @@ metadata:
 data:
   bird.conf: |
     log stderr all;
-    router id 192.168.1.10;
+    router id 192.168.2.10;
 
     protocol device {
       scan time 10;
@@ -107,11 +107,11 @@ data:
       neighbor 169.254.0.1 as 64514;
       ipv4 {
         import filter {
-          krt_prefsrc = 192.168.1.10;
+          krt_prefsrc = 192.168.2.10;
           accept;
         };
         export filter {
-          if net = 192.168.1.0/24 then accept;
+          if net = 192.168.2.0/24 then accept;
           reject;
         };
       };
@@ -122,11 +122,11 @@ data:
       neighbor 169.254.1.1 as 64514;
       ipv4 {
         import filter {
-          krt_prefsrc = 192.168.1.10;
+          krt_prefsrc = 192.168.2.10;
           accept;
         };
         export filter {
-          if net = 192.168.1.0/24 then accept;
+          if net = 192.168.2.0/24 then accept;
           reject;
         };
       };

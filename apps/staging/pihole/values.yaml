@@ -21,7 +21,7 @@ admin:
 extraEnvVars:
   TZ: "Asia/Jerusalem"
   FTLCONF_dns_listeningMode: "all"
-  FTLCONF_dns_revServers: "true,192.168.1.0/24,192.168.1.254,mdch-lab.dev"
+  FTLCONF_dns_revServers: "true,192.168.2.0/24,192.168.2.1,mdch-lab.dev"
   PIHOLE_HOSTNAME: "localhost"
 
 extraEnvVarsSecret:
@@ -34,11 +34,11 @@ DNS2: "1.0.0.1"
 
 dnsmasq:
   customDnsEntries:
-    - host-record=mdch-lab.dev,192.168.1.25
-    - host-record=controlplane.mdch-lab.dev,192.168.1.10
-    - host-record=node01.mdch-lab.dev,192.168.1.11
-    - host-record=node02.mdch-lab.dev,192.168.1.12
-    - address=/.mdch-lab.dev/192.168.1.25
+    - host-record=mdch-lab.dev,192.168.2.25
+    - host-record=controlplane.mdch-lab.dev,192.168.2.10
+    - host-record=node01.mdch-lab.dev,192.168.2.11
+    - host-record=node02.mdch-lab.dev,192.168.2.12
+    - address=/.mdch-lab.dev/192.168.2.25
 
 adlists:
   - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts

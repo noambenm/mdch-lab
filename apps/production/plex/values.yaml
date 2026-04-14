@@ -5,7 +5,7 @@ ingress:
 service:
   type: LoadBalancer
   port: 32400
-  loadBalancerIP: 192.168.1.21
+  loadBalancerIP: 192.168.2.21
 
 affinity:
   nodeAffinity:
@@ -18,7 +18,7 @@ affinity:
             - raspberrypi
 
 extraEnv:
-  ADVERTISE_IP: "http://192.168.1.21:32400,https://plex.mdch-lab.dev:443"
+  ADVERTISE_IP: "http://192.168.2.21:32400,https://plex.mdch-lab.dev:443"
   TZ: "Asia/Jerusalem"
   PLEX_CLAIM: "claim-brG3Q3rBYEwp5zX1Qryx"
 
@@ -30,6 +30,6 @@ extraVolumeMounts:
 extraVolumes:
   - name: plex-media
     nfs:
-      server: 192.168.1.98
+      server: 192.168.2.98
       path: /nfs/Plex
       readOnly: false
