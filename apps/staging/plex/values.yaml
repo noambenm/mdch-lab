@@ -3,6 +3,6 @@ ingress:
   url: ""
 
 extraEnv:
-  ADVERTISE_IP: "http://192.168.2.21:32400,https://plex.mdch-lab.dev:443"
+  ADVERTISE_IP: "http://10.10.10.21:32400,https://plex.mdch-lab.dev:443"
   TZ: "Asia/Jerusalem"
   PLEX_CLAIM: "claim-r5cLU1XVfdpbVxy_8Gk4"

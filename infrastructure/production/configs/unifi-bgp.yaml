@@ -1,0 +1,60 @@
+---
+# 1. The new IP Pool for your LoadBalancers
+apiVersion: cilium.io/v2
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: "ip-pool"
+spec:
+  blocks:
+  - start: "10.10.10.10"
+    stop: "10.10.10.250"
+---
+# 2. Define WHAT to advertise (Any assigned LoadBalancer IPs)
+apiVersion: cilium.io/v2
+kind: CiliumBGPAdvertisement
+metadata:
+  name: unifi-bgp-advertisement
+  labels:
+    advertise: "unifi-bgp"
+spec:
+  advertisements:
+    - advertisementType: "Service"
+      service:
+        addresses:
+          - LoadBalancerIP
+      selector:
+        matchLabels: {} 
+---
+# 3. Define HOW to peer with the gateway
+apiVersion: cilium.io/v2
+kind: CiliumBGPPeerConfig
+metadata:
+  name: unifi-peer-config
+spec:
+  timers:
+    holdTimeSeconds: 9
+    keepAliveTimeSeconds: 3
+  families:
+    - afi: ipv4
+      safi: unicast
+      advertisements:
+        matchLabels:
+          advertise: "unifi-bgp" 
+---
+# 4. Define WHO connects to the gateway
+apiVersion: cilium.io/v2
+kind: CiliumBGPClusterConfig
+metadata:
+  name: unifi-bgp-cluster
+spec:
+  nodeSelector:
+    matchLabels: {} # Selects all nodes (your Pi)
+  bgpInstances:
+    - name: "pi-bgp-instance"
+      localASN: 64512
+      peers:
+        - name: "unifi-cloud-gateway"
+          peerASN: 64513
+          peerAddress: 192.168.2.1 # The physical IP of your UniFi gateway
+          peerConfigRef:
+            name: "unifi-peer-config"
