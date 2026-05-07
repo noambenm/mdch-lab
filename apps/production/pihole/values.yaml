@@ -35,8 +35,8 @@ extraEnvVarsSecret:
     name: pihole-password
     key: password
 
-DNS1: "1.1.1.1"
-DNS2: "1.0.0.1"
+DNS1: "192.168.2.1"
+DNS2: "192.168.2.1"
 
 dnsmasq:
   customDnsEntries:
