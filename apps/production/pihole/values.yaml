@@ -42,9 +42,10 @@ dnsmasq:
   customDnsEntries:
     - address=/mdch-lab.dev/192.168.2.25
     - server=/staging.mdch-lab.dev/#
-    - server=/gcp.mdch-lab.dev/10.1.0.10
-    - server=/cloudworkstations.dev/10.1.0.10
-    - server=/me-west1.p.sourcemanager.dev/10.1.0.10
+    - server=/gcp.mdch-lab.dev/10.1.0.49
+    - server=/cloudworkstations.dev/10.1.0.49
+    - server=/me-west1.p.sourcemanager.dev/10.1.0.49
+    - server=/p.googleapis.com/10.1.0.49
 
 adlists:
   - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
