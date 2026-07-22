@@ -45,6 +45,7 @@ dnsmasq:
     - server=/gcp.mdch-lab.dev/100.64.0.41
     - server=/cloudworkstations.dev/100.64.0.41
     - server=/me-west1.p.sourcemanager.dev/100.64.0.41
+    - server=/p.googleapis.com/100.64.0.41
 
 adlists:
   - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
