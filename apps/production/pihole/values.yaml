@@ -1,7 +1,7 @@
 serviceDns:
   mixedService: true
   externalTrafficPolicy: Cluster
-  loadBalancerIP: 192.168.2.20
+  loadBalancerIP: 172.16.20.20
   type: LoadBalancer
 
 serviceDhcp:
@@ -27,7 +27,7 @@ admin:
 extraEnvVars:
   TZ: "Asia/Jerusalem"
   FTLCONF_dns_listeningMode: "all"
-  FTLCONF_dns_revServers: "true,192.168.2.0/24,192.168.2.1,mdch-lab.dev"
+  FTLCONF_dns_revServers: "true,172.16.20.0/24,172.16.20.1,mdch-lab.dev"
   PIHOLE_HOSTNAME: "localhost"
 
 extraEnvVarsSecret:
@@ -35,12 +35,12 @@ extraEnvVarsSecret:
     name: pihole-password
     key: password
 
-DNS1: "192.168.2.1"
-DNS2: "192.168.2.1"
+DNS1: "172.16.20.1"
+DNS2: "172.16.20.1"
 
 dnsmasq:
   customDnsEntries:
-    - address=/mdch-lab.dev/192.168.2.25
+    - address=/mdch-lab.dev/172.16.20.25
     - server=/staging.mdch-lab.dev/#
     - server=/gcp.mdch-lab.dev/100.64.0.41
     - server=/cloudworkstations.dev/100.64.0.41
