@@ -42,7 +42,7 @@ spec:
                 accept;
               };
               export filter {
-                if net = 192.168.2.0/24 then accept;
+                if net = 172.16.20.0/24 then accept;
                 reject;
               };
             };
@@ -57,7 +57,7 @@ spec:
                 accept;
               };
               export filter {
-                if net = 192.168.2.0/24 then accept;
+                if net = 172.16.20.0/24 then accept;
                 reject;
               };
             };
