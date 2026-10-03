@@ -38,15 +38,6 @@ extraEnvVarsSecret:
 DNS1: "172.16.20.1"
 DNS2: "172.16.20.1"
 
-dnsmasq:
-  customDnsEntries:
-    - address=/mdch-lab.dev/172.16.20.25
-    - server=/staging.mdch-lab.dev/#
-    - server=/gcp.mdch-lab.dev/100.64.0.41
-    - server=/cloudworkstations.dev/100.64.0.41
-    - server=/me-west1.p.sourcemanager.dev/100.64.0.41
-    - server=/p.googleapis.com/100.64.0.41
-
 adlists:
   - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
   - https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt
