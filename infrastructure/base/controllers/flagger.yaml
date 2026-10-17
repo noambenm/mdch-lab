@@ -21,6 +21,9 @@ spec:
     digest: sha256:a442a581eec96b8ca45df6c5d2b8a5a7a00fc7de2aac80a96675ae978095b672 # version 1.45.0+a442a581eec9
   verify:
     provider: cosign
+    matchOIDCIdentity:
+      - issuer: '^https://token\.actions\.githubusercontent\.com$'
+        subject: '^https://github\.com/fluxcd/flagger/.*$'
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
