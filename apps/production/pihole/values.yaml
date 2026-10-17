@@ -38,10 +38,6 @@ extraEnvVarsSecret:
 DNS1: "172.16.20.1"
 DNS2: "172.16.20.1"
 
-dnsmasq:
-  customDnsEntries:
-    - local=/mdch-lab.dev/
-
 adlists:
   - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
   - https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt
