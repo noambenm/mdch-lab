@@ -18,8 +18,9 @@ spec:
     operation: copy
   url: oci://quay.io/cilium/charts/cilium
   ref:
-    # Pinned: Cilium >= 1.19.9 needs kernel BTF (CONFIG_DEBUG_INFO_BTF), which Raspberry Pi kernels don't ship.
-    digest: sha256:22d2bac5b902f5c17ca289466c39c397b5dd5b9074d8e35cd87f632e03832ec4 # version 1.19.1+22d2bac5b902
+    # Pinned: Cilium >= 1.19.3 needs kernel BTF (CONFIG_DEBUG_INFO_BTF), which Raspberry Pi kernels don't ship.
+    # See https://github.com/cilium/cilium/pull/46063
+    digest: sha256:5e5f48bb9f09d9db0d5f4aa03a6a0b3c983315d46f0d6a8345269ac99eda5fcd # version 1.19.2+5e5f48bb9f09
 #  verify:
 #    provider: cosign
 #    matchOIDCIdentity:
