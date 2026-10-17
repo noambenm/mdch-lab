@@ -20,7 +20,8 @@ kubeControllerManager:
     targetPort: 10257
   serviceMonitor:
     https: true
-    insecureSkipVerify: true
+    tlsConfig:
+      insecureSkipVerify: true
 
 kubeEtcd:
   enabled: false
@@ -33,7 +34,8 @@ kubeScheduler:
     targetPort: 10259
   serviceMonitor:
     https: true
-    insecureSkipVerify: true
+    tlsConfig:
+      insecureSkipVerify: true
 
 kubeProxy:
   enabled: false

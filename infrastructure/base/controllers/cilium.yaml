@@ -18,7 +18,7 @@ spec:
     operation: copy
   url: oci://quay.io/cilium/charts/cilium
   ref:
-    digest: sha256:22d2bac5b902f5c17ca289466c39c397b5dd5b9074d8e35cd87f632e03832ec4 # version 1.19.1+22d2bac5b902
+    digest: sha256:e8b36654f39cf7e9ce0b90e5610115ad5998ed4dc3b923a591066ad5b94a5700 # version 1.19.9+e8b36654f39c
 #  verify:
 #    provider: cosign
 #    matchOIDCIdentity:

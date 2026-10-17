@@ -18,7 +18,7 @@ spec:
     operation: copy
   url: oci://ghcr.io/fluxcd/charts/flagger
   ref:
-    digest: sha256:6e8801f447bc9d3dcac132374ef02674a2cdfd44bacbb60c69e66bb85764adc7 # version 1.42.0+6e8801f447bc
+    digest: sha256:a442a581eec96b8ca45df6c5d2b8a5a7a00fc7de2aac80a96675ae978095b672 # version 1.45.0+a442a581eec9
   verify:
     provider: cosign
 ---

@@ -19,6 +19,7 @@ spec:
   chart:
     spec:
       chart: loadtester
+      version: 0.39.0
       interval: 6h
       sourceRef:
         kind: HelmRepository

@@ -18,7 +18,7 @@ spec:
     operation: copy
   url: oci://quay.io/jetstack/charts/cert-manager
   ref:
-    digest: sha256:0ba58efe6e5b3f328f5aa6f688932833b3bc5af99b5b987c8086651217b572ad # version 1.20.0+0ba58efe6e5b
+    digest: sha256:634dce9c13b56677a2c05e2ab76c312d0be2664022d5dd05815da67e1fd5f610 # version 1.21.2+634dce9c13b5
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
